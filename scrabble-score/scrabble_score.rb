@@ -2,14 +2,12 @@ class Scrabble
   private
 
   def self.flatten(scoring_dict)
-    flattened_hash = Hash::new
     scoring_dict.keys.map { |letters_list|
       letters_list.map {
         |letter|
         [letter, scoring_dict[letters_list]]
       }.to_h
-    }.each { |letters_hash| flattened_hash.merge!(letters_hash) }
-    flattened_hash
+    }.reduce(Hash::new, :merge!)
   end
 
   # flatten the original scoring table to be in form
@@ -24,5 +22,5 @@ class Scrabble
     ["K"] => 5,
     ["J", "X"] => 8,
     ["Q", "Z"] => 10,
-  })
+  }).freeze
 end
