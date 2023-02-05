@@ -98,4 +98,10 @@ class RomanNumeralsTest < Minitest::Test
     # skip
     assert_equal "MMM", 3000.to_roman
   end
+
+  def test_above_3000_raise
+    assert_raises ArgumentError do
+      4500.to_roman
+    end
+  end
 end
